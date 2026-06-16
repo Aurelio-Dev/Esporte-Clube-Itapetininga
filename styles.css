@@ -3305,7 +3305,7 @@ body.mobile-menu-open {
   margin: 1.1rem 0 0;
   color: #fccc00;
   font-family: "Barlow Condensed", Inter, sans-serif;
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-size: clamp(0.80rem, 1.45vw, 1.0rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.14em;
