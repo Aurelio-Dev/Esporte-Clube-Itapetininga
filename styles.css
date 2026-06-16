@@ -656,9 +656,10 @@ button:focus-visible {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
-  width: min(100%, 13.5rem);
-  margin-top: 1.8rem;
+  width: auto;
+  margin-top: 1.2rem;
   margin-bottom: clamp(2rem, 4vw, 3.6rem);
   animation: hero-rise 850ms 360ms ease both;
 }
@@ -667,7 +668,7 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: min(100%, 13.5rem);
   min-height: 3.35rem;
   padding: 0.85rem 1.25rem;
   border: 1px solid transparent;
@@ -802,11 +803,11 @@ button:focus-visible {
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
-    margin-top: 1.35rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
   }
 
-  .hero-fpf-badge {
+  .hero-fpf-text {
     width: 100%;
   }
 
@@ -819,7 +820,7 @@ button:focus-visible {
   .hero-image,
   .hero-title,
   .hero-tagline,
-  .hero-fpf-badge,
+  .hero-fpf-text,
   .hero-actions {
     animation: none;
   }
@@ -1837,51 +1838,116 @@ body.mobile-menu-open {
 
 .history-archive {
   position: relative;
-  min-height: 34rem;
+  min-height: 38rem;
   order: 1;
-}
-
-.history-archive-stripe {
-  position: absolute;
-  top: 7%;
-  right: 7%;
-  width: 72%;
-  height: 82%;
-  background: linear-gradient(
-    90deg,
-    #fccc00 0 16%,
-    transparent 16% 23%,
-    #082567 23% 100%
-  );
-  transform: rotate(-5deg);
-  box-shadow: 0 2rem 4rem rgba(0, 18, 65, 0.32);
 }
 
 .history-archive-main,
 .history-archive-jersey {
   position: absolute;
   overflow: hidden;
-  border: 1px solid rgba(252, 204, 0, 0.34);
   background: #001241;
   box-shadow: 0 2.2rem 5rem rgba(0, 0, 0, 0.34);
 }
 
 .history-archive-main {
-  inset: 0 2rem 2rem 0;
+  overflow: visible;
+  background: #f3ecd6;
+  padding: 0.85rem 0.85rem 2.6rem;
+  border: 4px solid #082567;
+  outline: 2px solid #fccc00;
+  outline-offset: 4px;
+  box-shadow:
+    0 1.8rem 3.2rem rgba(0, 0, 0, 0.42),
+    0 0.6rem 1.2rem rgba(0, 0, 0, 0.22);
+  border-radius: 2px;
 }
 
 .history-archive-jersey {
-  right: 0;
-  bottom: 1.25rem;
-  width: min(32%, 11rem);
-  aspect-ratio: 0.78;
-  padding: 0.85rem;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.96),
-    rgba(238, 238, 238, 0.92)
-  );
-  transform: rotate(3deg);
+  border: 1px solid rgba(252, 204, 0, 0.34);
+}
+
+.history-archive-main {
+  inset: 0 0 1rem 0;
+}
+
+.history-archive-main img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: calc(100% - 1.75rem);
+  object-fit: contain;
+  background: #f3ecd6;
+  filter: sepia(0.22) saturate(0.82) contrast(1.08) brightness(0.94);
+  border: 1px solid rgba(8, 37, 103, 0.18);
+}
+
+.history-archive-corner {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #fccc00;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.history-archive-corner--tl {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.history-archive-corner--br {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+.history-archive-caption {
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-condensed, "Barlow Condensed", "Oswald", sans-serif);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  color: #082567;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.history-archive-caption-tag {
+  flex-shrink: 0;
+  padding: 0.18rem 0.5rem;
+  background: #082567;
+  color: #fccc00;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.history-archive-caption-detail {
+  font-weight: 500;
+  color: rgba(8, 37, 103, 0.78);
+  letter-spacing: 0.06em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-archive-jersey {
+  right: -1rem;
+  bottom: 0.5rem;
+  width: min(52%, 17rem);
+  aspect-ratio: 1.3;
+  padding: 0;
+  background: #001241;
+  transform: rotate(1.5deg);
 }
 
 .history-archive img {
@@ -1895,13 +1961,18 @@ body.mobile-menu-open {
 }
 
 .history-archive-jersey img {
-  object-fit: contain;
-  filter: saturate(0.96) contrast(1.04);
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.88) contrast(1.08) brightness(0.92);
 }
 
-.history-archive:hover img {
+.history-archive:hover .history-archive-main img {
+  transform: scale(1.025);
+  filter: sepia(0.12) saturate(0.95) contrast(1.1) brightness(1);
+}
+
+.history-archive:hover .history-archive-jersey img {
   transform: scale(1.035);
-  filter: saturate(1.05) contrast(1.1) brightness(1);
 }
 
 @media (max-width: 1023px) {
@@ -1926,7 +1997,7 @@ body.mobile-menu-open {
   }
 
   .history-archive {
-    min-height: 32rem;
+    min-height: 36rem;
   }
 }
 
@@ -1958,17 +2029,17 @@ body.mobile-menu-open {
   }
 
   .history-archive {
-    min-height: 29rem;
+    min-height: 32rem;
   }
 
   .history-archive-main {
-    inset: 0 2rem 2rem 0;
+    inset: 0 0 1rem 0;
   }
 
   .history-archive-jersey {
-    right: 0;
-    bottom: 1.5rem;
-    width: min(32%, 11rem);
+    right: -0.5rem;
+    bottom: 0.5rem;
+    width: min(52%, 14rem);
   }
 }
 
@@ -2903,7 +2974,7 @@ body.mobile-menu-open {
 }
 
 .history-editorial.screen-section .history-archive {
-  min-height: clamp(22rem, 42vh, 28rem);
+  min-height: clamp(26rem, 48vh, 34rem);
 }
 
 #contact.screen-section .gap-24 {
@@ -2961,12 +3032,12 @@ body.mobile-menu-open {
     grid-column: 2;
     grid-row: 1;
     align-self: start;
-    min-height: clamp(18rem, 38vh, 24rem);
+    min-height: clamp(24rem, 46vh, 32rem);
     margin-top: 0.75rem;
   }
 
   .history-editorial.screen-section .history-archive-main {
-    inset: 0 2rem 2rem 0;
+    inset: 0 0 1rem 0;
   }
 
   .history-editorial.screen-section .history-archive-jersey {
@@ -3226,35 +3297,18 @@ body.mobile-menu-open {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.hero-fpf-badge {
+.hero-fpf-text {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  width: min(100%, 13.5rem);
-  box-sizing: border-box;
-  margin-top: 0;
-  padding: 0.6rem 1.1rem 0.6rem 0.9rem;
-  background: rgba(255, 255, 255, 0.93);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
-  animation: hero-rise 850ms 480ms ease both;
-}
-
-.hero-fpf-label {
-  color: #001241;
+  min-height: 3.35rem;
+  color: #fccc00;
   font-family: "Barlow Condensed", Inter, sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-}
-
-.hero-fpf-logo {
-  width: 3rem;
-  height: 3rem;
-  object-fit: contain;
-  flex-shrink: 0;
+  text-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.4);
+  animation: hero-rise 850ms 480ms ease both;
 }
 
 /* Correcao #3 - Controles flutuantes de acessibilidade */
