@@ -9,12 +9,6 @@ body {
   background: #f4f6fa;
 }
 
-/* Impede que .screen-section force height: 100vh nesta página */
-.transp-hero {
-  height: auto !important;
-  min-height: auto !important;
-}
-
 /* ── Página wrapper ── */
 .transp-page {
   min-height: 60vh;
@@ -35,7 +29,10 @@ body {
 .transp-hero-kicker {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 0.7rem;
+  max-width: 100%;
   color: #fccc00;
   font-family: "Barlow Condensed", Inter, sans-serif;
   font-size: 0.88rem;
@@ -65,6 +62,10 @@ body {
   color: #fff;
 }
 
+.transp-hero h1 .transp-title-line {
+  display: block;
+}
+
 .transp-hero p {
   max-width: 42rem;
   margin: 0 auto;
@@ -77,7 +78,7 @@ body {
 .transp-container {
   max-width: 56rem;
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 clamp(1rem, 4vw, 1.25rem);
 }
 
 /* ── Bloco de ano ── */
@@ -165,7 +166,7 @@ body {
 
 .transp-doc-meta {
   font-size: 0.82rem;
-  color: #7a84a0;
+  color: #5a647e;
   margin-top: 0.15rem;
 }
 
@@ -174,7 +175,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   margin-top: auto;
-  padding: 0.6rem 1.1rem;
+  padding: 0.75rem 1.25rem;
+  min-height: 2.75rem;
   background: #082567;
   color: #fff;
   font-family: "Barlow Condensed", Inter, sans-serif;
@@ -204,9 +206,10 @@ body {
   align-items: center;
   gap: 0.45rem;
   margin-top: auto;
-  padding: 0.55rem 1rem;
+  padding: 0.7rem 1.1rem;
+  min-height: 2.5rem;
   background: #f0f3fa;
-  color: #7a84a0;
+  color: #5a647e;
   font-family: "Barlow Condensed", Inter, sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
@@ -233,11 +236,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin: 2.5rem 0 0;
+  margin: 2.5rem 0 0 -0.75rem;
+  padding: 0.5rem 0.75rem;
   color: #082567;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
+  border-radius: 0.4rem;
   transition: gap 200ms ease;
 }
 
@@ -248,9 +253,43 @@ body {
 /* ── Mobile ── */
 @media (max-width: 600px) {
   .transp-hero {
-    padding: 5rem 1rem 4rem;
+    padding: 3rem 1rem 3.5rem;
+    background:
+      radial-gradient(circle at 8% 8%, rgba(252, 204, 0, 0.1), transparent 14rem),
+      linear-gradient(135deg, #082567 0%, #001241 100%);
+  }
+  .transp-hero :is(.transp-hero-kicker) {
+    display: block;
+    width: min(100%, 18rem);
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.76rem;
+    line-height: 1.35;
+    letter-spacing: 0.12em;
+  }
+  .transp-hero-kicker::before,
+  .transp-hero-kicker::after {
+    display: none;
+  }
+  .transp-hero h1 {
+    font-size: clamp(2.65rem, 13vw, 3.2rem);
   }
   .transp-docs-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .site-nav,
+  .desktop-support-link {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+
+  .mobile-menu {
+    display: grid !important;
   }
 }
